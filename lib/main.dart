@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sample/screen1.dart';
+import 'package:sample/Task_Data.dart';
+
 void main(){
   runApp(App());
 }
@@ -10,28 +13,35 @@ class App extends StatelessWidget{
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: MaterialApp(
-          home: screen1(),
-          title:"dooit",
-          theme :ThemeData(
-            primaryColor: Colors.lightBlue[800],
+        child: ChangeNotifierProvider(
+          create: (BuildContext context) {
+            return TaskData(
 
-            // Define the default font family.
-            fontFamily: 'Georgia',
+            );
+          },
+          child: MaterialApp(
+            home: screen1(),
+            title:"dooit",
+            theme :ThemeData(
+              primaryColor: Colors.lightBlue[800],
 
-            // Define the default `TextTheme`. Use this to specify the default
-            // text styling for headlines, titles, bodies of text, and more.
-            textTheme: const TextTheme(
-              displayLarge: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
-              titleLarge: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
-              bodyMedium: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
+              // Define the default font family.
+              fontFamily: 'Georgia',
+
+              // Define the default `TextTheme`. Use this to specify the default
+              // text styling for headlines, titles, bodies of text, and more.
+              textTheme: const TextTheme(
+                displayLarge: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
+                titleLarge: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
+                bodyMedium: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
+              ),
             ),
-          ),
 
 
 
 
-          ),
+            ),
+        ),
       ),
     );
 

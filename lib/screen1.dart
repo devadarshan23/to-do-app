@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:sample/task_list.dart';
-
-
-class screen1 extends StatelessWidget {
+import 'package:provider/provider.dart';
+import 'package:sample/Task_Data.dart';
+// ignore: must_be_immutable
+class screen1 extends StatefulWidget {
   const screen1({Key? key}) : super(key: key);
+  @override
+  State<screen1> createState() => _screen1State();
+}
+
+class _screen1State extends State<screen1> {
+  late String newtasktitle;
   Widget buildBottomsheet(BuildContext context){
+
     return Container(
       color:Color(0xff757575),
       child:Container(
@@ -31,6 +39,9 @@ class screen1 extends StatelessWidget {
               child: TextField(
                 autofocus: true,
                 textAlign: TextAlign.center ,
+                onChanged:(newtext){
+                  newtasktitle=newtext;
+                },
               ),
             ),
             Padding(
@@ -50,8 +61,11 @@ class screen1 extends StatelessWidget {
                       },
                     ),
                   ),
-                  onPressed: () { },
-                  child: Text('Add')
+                  onPressed: () {
+                    Provider.of<TaskData>(context,listen: false).addtask(newtasktitle);
+                    Navigator.pop(context);
+                  },
+                  child: Text('Add'),
               ),
             )
           ]
@@ -59,6 +73,7 @@ class screen1 extends StatelessWidget {
       ),
     );
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,7 +89,7 @@ class screen1 extends StatelessWidget {
       body:Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-              
+
               SafeArea(
                 child: CircleAvatar(
                   child: Icon(
